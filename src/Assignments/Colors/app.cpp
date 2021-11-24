@@ -10,6 +10,11 @@
 
 #include "Application/utils.h"
 
+float get_color(float x=0.0f) {
+    return x / 255.0f;
+};
+
+
 void SimpleShapeApplication::init()
 {
     // A utility function that reads the shader sources, compiles them and creates the program object
@@ -24,21 +29,20 @@ void SimpleShapeApplication::init()
         exit(-1);
     }
 
-    float color_normalization = 255.0f;
 
     // A vector containing the x,y,z vertex coordinates for the triangle.
     std::vector<GLfloat> vertices = {
         // House base RECT
-        -0.2,0.2f,0.0f,     0.0f,255.0f/color_normalization,0.0f,
-        -0.2f,-0.2f,0.0f,   0.0f,255.0f/color_normalization,0.0f,
-        0.2f,-0.2f,0.0f,    0.0f,255.0f/color_normalization,0.0f,
-        -0.2f,0.2f,0.0f,    0.0f,255.0f/color_normalization,0.0f,
-        0.2f,0.2f,0.0f,     0.0f,255.0f/color_normalization,0.0f,
-        0.2f,-0.2f,0.0f,    0.0f,255.0f/color_normalization,0.0f,
+        -0.2,0.2f,0.0f,     get_color(0.0f),get_color(255.0f),get_color(0.0f),
+        -0.2f,-0.2f,0.0f,   get_color(0.0f),get_color(255.0f),get_color(0.0f),
+        0.2f,-0.2f,0.0f,    get_color(0.0f),get_color(255.0f),get_color(0.0f),
+        -0.2f,0.2f,0.0f,    get_color(0.0f),get_color(255.0f),get_color(0.0f),
+        0.2f,0.2f,0.0f,     get_color(0.0f),get_color(255.0f),get_color(0.0f),
+        0.2f,-0.2f,0.0f,    get_color(0.0f),get_color(255.0f),get_color(0.0f),
         //ROOF Triangle
-        -0.2f,0.2f,0.0f,    255.0f/color_normalization,0.0f,0.0f,
-        0.2f,0.2f,0.0f,     255.0f/color_normalization,0.0f,0.0f,
-        0.0f,0.5f,0.0f,     255.0f/color_normalization,0.0f,0.0f,
+        -0.2f,0.2f,0.0f,    get_color(255.0f),get_color(0.0f),get_color(0.0f),
+        0.2f,0.2f,0.0f,     get_color(255.0f),get_color(0.0f),get_color(0.0f),
+        0.0f,0.5f,0.0f,     get_color(255.0f),get_color(0.0f),get_color(0.0f),
 
     };
 

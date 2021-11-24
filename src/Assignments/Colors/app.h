@@ -20,6 +20,9 @@ public:
 
     void frame() override;
 
+
 private:
     GLuint vao_;
 };
+
+float get_color();
