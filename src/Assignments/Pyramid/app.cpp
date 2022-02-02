@@ -7,7 +7,7 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
-#include <glm/glm.hpp>
+#include "glm/glm.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -40,6 +40,7 @@ void SimpleShapeApplication::init()
 
 
 
+      // A vector containing the x,y,z vertex coordinates for the triangle.
     std::vector<GLfloat> vertices = {
         // podstawa (0,1,2,3) #ff0080 cyan
         0.0f, 0.0f, 0.0f, get_color(0.0f),get_color(255.0f),get_color(255.0f),
@@ -68,7 +69,12 @@ void SimpleShapeApplication::init()
     };
 
     std::vector<GLushort> indices = {
-            0,1,2,3,1,2,4,5,6,7,8,9,10,11,12,13,14,15
+            1,0,2,
+            3,1,2,
+            5,4,6,
+            7,8,9,
+            12,11,10,
+            13,14,15
     };
 
     // Vertex buffer (VBO)
@@ -140,6 +146,7 @@ void SimpleShapeApplication::init()
     glUseProgram(program);
 
 }
+
 
 void SimpleShapeApplication::frame() {
     glBindVertexArray(vao_);
