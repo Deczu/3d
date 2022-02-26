@@ -67,9 +67,13 @@ void SimpleShapeApplication::init()
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+    //end of vao "recording"
 
+    // Setting the background color of the rendering window,
+    // I suggest not to use white or black for better debuging.
     glClearColor(0.81f, 0.81f, 0.8f, 1.0f);
 
+    // This setups an OpenGL vieport of the size of the whole rendering window.
 
     glViewport(0, 0, w, h);
 

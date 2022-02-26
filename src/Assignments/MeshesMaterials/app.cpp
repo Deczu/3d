@@ -28,45 +28,38 @@ void SimpleShapeApplication::init()
 
     xe::ColorMaterial::init();
 
-
     // A vector containing the x,y,z vertex coordinates for the triangle.
     std::vector<GLfloat> vertices = {
-        // podstawa (0,1,2,3) #ff0080 cyan
-        0.0f, 0.0f, 0.0f, get_color(0.0f),get_color(255.0f),get_color(255.0f),
-        0.0f, 0.0f, 1.0f, get_color(0.0f),get_color(255.0f),get_color(255.0f),
-        1.0f, 0.0f, 0.0f, get_color(0.0f),get_color(255.0f),get_color(255.0f),
-        1.0f, 0.0f, 1.0f, get_color(0.0f),get_color(255.0f),get_color(255.0f),
-
-        // FW (4,5,6) #FF0000 RED
-        0.0f, 0.0f, 0.0f, get_color(255.0f),get_color(0.0f),get_color(0.0f),
-        1.0f, 0.0f, 0.0f, get_color(255.0f),get_color(0.0f),get_color(0.0f),
-        0.5f, 1.0f, 0.5f, get_color(255.0f),get_color(0.0f),get_color(0.0f),
-
-        //lw (7,8,9) #00FF00 GREEN
-        0.0f, 0.0f, 0.0f, get_color(0.0f),get_color(255.0f),get_color(0.0f),
-        0.0f, 0.0f, 1.0f, get_color(0.0f),get_color(255.0f),get_color(0.0f),
-        0.5f, 1.0f, 0.5f, get_color(0.0f),get_color(255.0f),get_color(0.0f),
-        // bw (10,11,12) #0000FF BLUE
-        1.0f, 0.0f, 1.0f,get_color(0.0f),get_color(0.0f),get_color(255.0f),
-        0.0f, 0.0f, 1.0f, get_color(0.0f),get_color(0.0f),get_color(255.0f),
-        0.5f, 1.0f, 0.5f, get_color(0.0f),get_color(0.0f),get_color(255.0f),
-
-        // RW (13,14,15) #FF0000 YELLOW
-        1.0f, 0.0f, 1.0f, get_color(255.0f),get_color(255.0f),get_color(0.0f),
-        1.0f, 0.0f, 0.0f, get_color(255.0f),get_color(255.0f),get_color(0.0f),
-        0.5f, 1.0f, 0.5f, get_color(255.0f),get_color(255.0f),get_color(0.0f),
+        // Front
+        -0.5f, -0.5f, -0.5f,
+        0.0f, 0.5f, 0.0f,   
+        0.5f, -0.5f, -0.5f, 
+        // Left
+        -0.5f, -0.5f, 0.5f, 
+        0.0f, 0.5f, 0.0f,   
+        -0.5f, -0.5f, -0.5f,
+        // Right
+        0.5f, -0.5f, -0.5f, 
+        0.0f, 0.5f, 0.0f,   
+        0.5f, -0.5f, 0.5f,  
+        // Back
+        0.5f, -0.5f, 0.5f,  
+        0.0f, 0.5f, 0.0f,   
+        -0.5f, -0.5f, 0.5f, 
+        // Base1
+        -0.5f, -0.5f, -0.5f,
+        0.5f, -0.5f, -0.5f, 
+        -0.5f, -0.5f, 0.5f, 
+        // Base2
+        0.5f, -0.5f, 0.5f,  
+        -0.5f, -0.5f, 0.5f, 
+        0.5f, -0.5f, -0.5f, 
     };
 
-    std::vector<GLushort> indices = {
-            1,0,2,
-            3,1,2,
-            5,4,6,
-            7,8,9,
-            12,11,10,
-            13,14,15
+    indices = {
+        0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17
     };
 
-    // MeshesMaterials
     auto pyramid = new xe::Mesh;
     pyramid->allocate_vertex_buffer(vertices.size() * sizeof(GLfloat), GL_STATIC_DRAW);
     pyramid->load_vertices(0, vertices.size() * sizeof(GLfloat), vertices.data());
@@ -82,7 +75,6 @@ void SimpleShapeApplication::init()
     pyramid->add_submesh(12, 18, new xe::ColorMaterial({0.0f, 1.0f, 1.0f, 1.0f}) ); 
     add_submesh(pyramid);
 
-    // UNIFORM BUFFER
     GLuint uniform_buffer;
     glGenBuffers(1, &uniform_buffer);
     glBindBuffer(GL_UNIFORM_BUFFER, uniform_buffer);
@@ -115,13 +107,7 @@ void SimpleShapeApplication::init()
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-    //end of vao "recording"
-
-    // Setting the background color of the rendering window,
-    // I suggest not to use white or black for better debuging.
     glClearColor(0.81f, 0.81f, 0.8f, 1.0f);
-
-    // This setups an OpenGL vieport of the size of the whole rendering window.
 
     glViewport(0, 0, w, h);
 
@@ -148,7 +134,6 @@ void SimpleShapeApplication::frame()
 void SimpleShapeApplication::framebuffer_resize_callback(int w, int h) {
     Application::framebuffer_resize_callback(w, h);
     glViewport(0,0,w,h); 
-    // P_ = glm::perspective(fov_, aspect_, near_, far_);
     camera_->set_aspect((float) w / h);
 }
 
